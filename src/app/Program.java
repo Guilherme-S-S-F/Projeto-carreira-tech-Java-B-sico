@@ -1,8 +1,11 @@
 package app;
 
+import java.util.Scanner;
+
 public class Program {
 
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
 		//db conta
 		// COLUNAS
 		// id, nome, cpf, email, senha
@@ -160,8 +163,12 @@ public class Program {
 			count++;
 		} 
 	}
-		
-	
-
+	public static void telaPrincipal(Scanner input){	
+		System.out.println("1-Criar Usuario");
+		System.out.println("2-Entrar Na Usuario");
+		System.out.println("3-Ver Usuarios");
+		System.out.println("4- Deletar Usuario");
+		System.out.println("Escolha");
+	}
 
 }
