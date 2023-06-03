@@ -47,5 +47,37 @@ public class Program {
 		}
 		System.out.println("Id inválido");
 	}
+	public static void transferir(double valor, int id, int pessoa, String[][]db) {
+		int count = 0;
+		if ( id < 0 || id > db.length  ) {
+			System.out.println("id invalido");
+			return;
+		}
+		if ( pessoa < 0 || pessoa > db.length  ) {
+			System.out.println("pessoa invalida");
+			return;
+			
+		}
+		if(valor <= 0){
+			System.out.println("Valor invalido");
+			return;
+			
+		}
+		while(count <= db.length) {
+			if(Integer.parseInt(db[count][0]) == id) {
+			double temp = Double.parseDouble(db[count][5]) - valor;
+			db[count][5] = temp + "";
+			}
+			if(Integer.parseInt(db[count][0] ) == pessoa) {
+				double temp = Double.parseDouble(db[count][5]) + valor;
+				db[count][5] = temp + "";
+			}
+			count++;
+		} 
+	}
+		
+	
+
 
 }
+
