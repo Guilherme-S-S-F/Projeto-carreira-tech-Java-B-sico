@@ -10,21 +10,20 @@ public class Program {
 		// COLUNAS
 		// id, nome, cpf, email, senha
 		String[][] contas = new String[15][5];
-		String[][] db = { { "0", "pedro", "019131", "gmail", "qq115" }, { "1", "pedro", "019131", "gmail", "qq115" } };
+		String[][] db = { { "0", "gui", "23232", "gui@", "123" }, { "1", "paulo", "019131", "paulo@", "123" } };
 		// db banco
 		// COLUNAS
 		// id, nome, cpf, email, senha, saldo
 		String[][] contasBanco = new String[15][6];
-		String[][] db2 = { { "0", "pedro", "019131", "gmail", "qq115", "100.0" },
-				{ "1", "pedro", "019131", "gmail", "qq115", "200.0" } };
-		
-		telaPrincipal(input, contas, contasBanco);
+		String[][] db2 = { { "0", "gui", "23232", "gui@", "123", "100.0" },
+				{ "1", "paulo", "019131", "paulo@", "123", "200.0" } };
 
+		telaPrincipal(input, contas, contasBanco);
 	}
 
 	// CRUD usuario
 	public static void criarUsuario(String nome, String cpf, String email, String senha, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (db[i][0] == null) {
 				db[i][0] = i + "";// id auto-incrementavel;
 				db[i][1] = nome;
@@ -41,7 +40,7 @@ public class Program {
 	}
 
 	public static void editarUsuario(int id, String nome, String cpf, String email, String senha, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (Integer.parseInt(db[i][0]) == id) {
 				db[i][1] = nome;
 				db[i][2] = cpf;
@@ -53,7 +52,7 @@ public class Program {
 	}
 
 	public static void deletarUsuario(int id, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (Integer.parseInt(db[i][0]) == id) {
 				db[i][0] = null;
 				db[i][1] = null;
@@ -66,10 +65,10 @@ public class Program {
 	}
 
 	// CRUD conta Bancaria
-	public static void criarContaBanco(String nome, String cpf, String email, String senha, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+	public static void criarContaBanco(String id, String nome, String cpf, String email, String senha, String[][] db) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (db[i][0] == null) {
-				db[i][0] = i + "";// id auto-incrementavel;
+				db[i][0] = id;// id auto-incrementavel;
 				db[i][1] = nome;
 				db[i][2] = cpf;
 				db[i][3] = email;
@@ -83,18 +82,19 @@ public class Program {
 	public static String lerContaBanco(int id, String[][] db) {
 		return "Nome: " + db[id][1] + "\nEmail: " + db[id][3] + "\nCpf: " + db[id][2] + "\nSaldo: " + db[id][5];
 	}
+
 	public static double verSaldo(int id, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (Integer.parseInt(db[i][0]) == id) {
 				return Double.parseDouble(db[i][5]);
 			}
 		}
-		
+
 		return 0.0;
 	}
 
 	public static void editarContaBanco(int id, String nome, String cpf, String email, String senha, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (Integer.parseInt(db[i][0]) == id) {
 				db[i][1] = nome;
 				db[i][2] = cpf;
@@ -106,7 +106,7 @@ public class Program {
 	}
 
 	public static void deletarContaBanco(int id, String[][] db) {
-		for (int i = 0; i <= db.length-1; i++) {
+		for (int i = 0; i <= db.length - 1; i++) {
 			if (Integer.parseInt(db[i][0]) == id) {
 				db[i][0] = null;
 				db[i][1] = null;
@@ -127,7 +127,7 @@ public class Program {
 		}
 		int count = 0;
 
-		while (count <= db.length-1) {
+		while (count <= db.length - 1) {
 			if (Integer.parseInt(db[count][0]) == id) {
 				double temp = Double.parseDouble(db[count][5]) - valor;
 				db[count][5] = temp + "";
@@ -145,7 +145,7 @@ public class Program {
 		}
 		int count = 0;
 
-		while (count <= db.length-1) {
+		while (count <= db.length - 1) {
 			if (Integer.parseInt(db[count][0]) == id) {
 				double temp = Double.parseDouble(db[count][5]) + valor;
 				db[count][5] = temp + "";
@@ -172,15 +172,22 @@ public class Program {
 			return;
 
 		}
-		while (count <= db.length) {
+		while (count <= db.length - 1) {
+			
+			if(Integer.parseInt(db[count][0]) == pessoa) {
+				double temp = Double.parseDouble(db[count][5]) + valor;
+				db[count][5] = temp + "";
+				break;
+			}
+			count++;
+		}
+		while (count <= db.length - 1) {
 			if (Integer.parseInt(db[count][0]) == id) {
 				double temp = Double.parseDouble(db[count][5]) - valor;
 				db[count][5] = temp + "";
+				break;
 			}
-			if (Integer.parseInt(db[count][0]) == pessoa) {
-				double temp = Double.parseDouble(db[count][5]) + valor;
-				db[count][5] = temp + "";
-			}
+			
 			count++;
 		}
 	}
@@ -189,7 +196,7 @@ public class Program {
 		int count = 0;
 		while (count <= db.length) {
 			if (db[count][1].equals(nome) && db[count][4].equals(senha)) {
-				return count;
+				return Integer.parseInt(db[count][0]);
 			}
 			count++;
 		}
@@ -197,12 +204,10 @@ public class Program {
 		return -1;
 	}
 
-
-
 	public static void telaPrincipal(Scanner input, String[][] dbUsuario, String[][] dbBanco) {
 		int op = 1;
-		
-		while(op != 0) {
+
+		while (op != 0) {
 			System.out.println("1-Criar Usuario");
 			System.out.println("2-Entrar No Usuario");
 			System.out.println("3-Ver Usuarios");
@@ -227,37 +232,39 @@ public class Program {
 				System.out.print("Qual Sua Senha: ");
 				String senha2 = input.nextLine();
 				int id = verificarConta(nome2, senha2, dbUsuario);
-				if(id == -1) {
+				if (id == -1) {
 					System.out.println("Senha ou nome invalido");
-				}else {
-						
+				} else {
+
 					// chamar segunda tela
+					System.out.println(id);
 					telaUsuario(input, id, dbUsuario, dbBanco);
 				}
-				
+
 				break;
 			case 3:
-				for (int i = 0; i <= dbUsuario.length-1; i++) {
-					if(dbUsuario[i][0] != null) {
+				for (int i = 0; i <= dbUsuario.length - 1; i++) {
+					if (dbUsuario[i][0] != null) {
 						System.out.println(lerUsuario(i, dbUsuario));
 					}
-					
+
 				}
 				break;
 			case 4:
 				System.out.print("Qual id voce quer deletar: ");
 				int id2 = Integer.parseInt(input.nextLine());
-	            deletarUsuario(id2, dbUsuario);
+				deletarUsuario(id2, dbUsuario);
 				break;
 			case 0:
 				System.out.println("Fechando o programa...");
 			}
 		}
-		
+
 	}
-	public static void telaUsuario(Scanner input,int id, String[][] dbUsuario, String[][] dbBanco) {
+
+	public static void telaUsuario(Scanner input, int id, String[][] dbUsuario, String[][] dbBanco) {
 		int op = 1;
-		while(op != 0) {
+		while (op != 0) {
 			System.out.println("1-Criar Conta Bancaria: ");
 			System.out.println("2-Entrar Na Conta Bancaria: ");
 			System.out.println("3-Deletar Conta Bancaria: ");
@@ -265,28 +272,29 @@ public class Program {
 			switch (op) {
 			case 1:
 				System.out.print("Escolha Uma Senha: ");
-		        String senha = input.nextLine();
-		        criarContaBanco(dbUsuario[id][1], dbUsuario[id][2], dbUsuario[id][3], senha, dbBanco);
-		        break;
+				String senha = input.nextLine();
+				criarContaBanco(dbUsuario[id][0], dbUsuario[id][1], dbUsuario[id][2], dbUsuario[id][3], senha, dbBanco);
+				break;
 			case 2:
-				System.out.print("Nome:" );
+				System.out.print("Nome:");
 				String nome = input.nextLine();
 				System.out.print("Sua Senha: ");
 				String senha2 = input.nextLine();
 				int id2 = verificarConta(nome, senha2, dbBanco);
-				if(id == -1) {
+				if (id2 == -1) {
 					System.out.println("Senha ou nome invalido");
-				}else {
-						
+				} else {
+
 					// chamar contaBancaria tela
-					telaBanco(input, id, dbUsuario, dbBanco);
+					System.out.println(id2);
+					telaBanco(input, id2, dbUsuario, dbBanco);
 				}
 				break;
 			case 3:
 				System.out.print("Qual id voce quer deletar: ");
 				int id3 = Integer.parseInt(input.nextLine());
-	            deletarUsuario(id3, dbBanco);
-	            break;
+				deletarUsuario(id3, dbBanco);
+				break;
 			case 0:
 				System.out.println("Voltando para tela principal");
 				break;
@@ -295,14 +303,15 @@ public class Program {
 			}
 		}
 	}
-	public static void telaBanco(Scanner input,int id, String[][] dbUsuario, String[][] dbBanco) {
+
+	public static void telaBanco(Scanner input, int id, String[][] dbUsuario, String[][] dbBanco) {
 		int op = 1;
-		while(op != 0) {
+		while (op != 0) {
 			System.out.println("1-Ver saldo");
 			System.out.println("2-Depositar");
 			System.out.println("3-Sacar");
 			System.out.println("4-Transferir");
-			
+
 			op = Integer.parseInt(input.nextLine());
 			switch (op) {
 			case 1:
@@ -317,13 +326,13 @@ public class Program {
 				System.out.println("Valor R$");
 				double valor2 = Double.parseDouble(input.nextLine());
 				sacarDinheiro(valor2, id, dbBanco);
-	            break;
+				break;
 			case 4:
 				System.out.println("id para transferir: ");
 				int id2 = Integer.parseInt(input.nextLine());
 				System.out.println("Valor R$");
 				double valor3 = Double.parseDouble(input.nextLine());
-				
+				System.out.println(id);
 				transferir(valor3, id, id2, dbBanco);
 				break;
 			case 0:
@@ -332,7 +341,6 @@ public class Program {
 			default:
 				System.out.println("Opção inválida");
 			}
-		
 
 		}
 	}
