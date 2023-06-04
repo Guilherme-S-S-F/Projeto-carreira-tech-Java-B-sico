@@ -188,7 +188,7 @@ public class Program {
 	public static int verificarConta(String nome, String senha, String[][] db) {
 		int count = 0;
 		while (count <= db.length) {
-			if (db[count][1] == nome && db[count][4] == senha) {
+			if (db[count][1].equals(nome) && db[count][4].equals(senha)) {
 				return count;
 			}
 			count++;
@@ -227,8 +227,14 @@ public class Program {
 				System.out.print("Qual Sua Senha: ");
 				String senha2 = input.nextLine();
 				int id = verificarConta(nome2, senha2, dbUsuario);
-				// chamar segunda tela
-				telaUsuario(input, id, dbUsuario, dbBanco);
+				if(id == -1) {
+					System.out.println("Senha ou nome invalido");
+				}else {
+						
+					// chamar segunda tela
+					telaUsuario(input, id, dbUsuario, dbBanco);
+				}
+				
 				break;
 			case 3:
 				for (int i = 0; i <= dbUsuario.length-1; i++) {
@@ -250,12 +256,11 @@ public class Program {
 		
 	}
 	public static void telaUsuario(Scanner input,int id, String[][] dbUsuario, String[][] dbBanco) {
-		int op = 0;
-		
+		int op = 1;
 		while(op != 0) {
-			System.out.print("1-Criar Conta Bancaria: ");
-			System.out.print("2-Entrar Na Conta Bancaria: ");
-			System.out.print("3-Deletar Conta Bancaria: ");
+			System.out.println("1-Criar Conta Bancaria: ");
+			System.out.println("2-Entrar Na Conta Bancaria: ");
+			System.out.println("3-Deletar Conta Bancaria: ");
 			op = Integer.parseInt(input.nextLine());
 			switch (op) {
 			case 1:
@@ -269,7 +274,13 @@ public class Program {
 				System.out.print("Sua Senha: ");
 				String senha2 = input.nextLine();
 				int id2 = verificarConta(nome, senha2, dbBanco);
-				//chamar tela  conta bancaria
+				if(id == -1) {
+					System.out.println("Senha ou nome invalido");
+				}else {
+						
+					// chamar contaBancaria tela
+					telaBanco(input, id, dbUsuario, dbBanco);
+				}
 				break;
 			case 3:
 				System.out.print("Qual id voce quer deletar: ");
@@ -287,15 +298,16 @@ public class Program {
 	public static void telaBanco(Scanner input,int id, String[][] dbUsuario, String[][] dbBanco) {
 		int op = 1;
 		while(op != 0) {
-			System.out.print("1-Ver saldo");
-			System.out.print("2-Depositar");
-			System.out.print("3-Sacar");
-			System.out.print("4-Transferir");
+			System.out.println("1-Ver saldo");
+			System.out.println("2-Depositar");
+			System.out.println("3-Sacar");
+			System.out.println("4-Transferir");
 			
 			op = Integer.parseInt(input.nextLine());
 			switch (op) {
 			case 1:
 				System.out.println(verSaldo(id, dbBanco));
+				break;
 			case 2:
 				System.out.println("Valor R$");
 				double valor = Double.parseDouble(input.nextLine());
