@@ -212,6 +212,7 @@ public class Program {
 			System.out.println("2-Entrar No Usuario");
 			System.out.println("3-Ver Usuarios");
 			System.out.println("4- Deletar Usuario");
+			System.out.println("0- Sair");
 			System.out.println("Digite A Escolha");
 			op = Integer.parseInt(input.nextLine());
 			switch (op) {
@@ -268,6 +269,7 @@ public class Program {
 			System.out.println("1-Criar Conta Bancaria: ");
 			System.out.println("2-Entrar Na Conta Bancaria: ");
 			System.out.println("3-Deletar Conta Bancaria: ");
+			System.out.println("0- Voltar");
 			op = Integer.parseInt(input.nextLine());
 			switch (op) {
 			case 1:
@@ -311,6 +313,7 @@ public class Program {
 			System.out.println("2-Depositar");
 			System.out.println("3-Sacar");
 			System.out.println("4-Transferir");
+			System.out.println("0- Voltar");
 
 			op = Integer.parseInt(input.nextLine());
 			switch (op) {
