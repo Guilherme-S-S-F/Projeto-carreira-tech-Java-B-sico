@@ -238,7 +238,7 @@ public class Program {
 				} else {
 
 					// chamar segunda tela
-					System.out.println(id);
+					System.out.printf("id:$d\n",id);
 					telaUsuario(input, id, dbUsuario, dbBanco);
 				}
 
@@ -288,7 +288,6 @@ public class Program {
 				} else {
 
 					// chamar contaBancaria tela
-					System.out.println(id2);
 					telaBanco(input, id2, dbUsuario, dbBanco);
 				}
 				break;
